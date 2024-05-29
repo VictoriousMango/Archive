@@ -6,4 +6,3 @@ cd ..
 cd ./Algorithms
 dir *.bat
 ENDLOCAL
-
