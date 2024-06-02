@@ -62,6 +62,7 @@ Rem Main Funtion which will run first and all the functions that is to be called
 
 :Main
 if exist ./Group ( echo Contected to Group Folder.) else ( mkdir Group)
+if exist ./Group/Executioner.py ( echo Contected to Excutioner. ) else echo print("Hello World!!") > ./Group/Executioner.py
 cls
 call :GroupList
 

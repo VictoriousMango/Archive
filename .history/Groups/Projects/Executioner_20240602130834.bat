@@ -62,6 +62,7 @@ Rem Main Funtion which will run first and all the functions that is to be called
 
 :Main
 if exist ./Group ( echo Contected to Group Folder.) else ( mkdir Group)
+if exist ./Group/Executioner.py ( echo Contected to Excutioner. ) else echo print("Hello World!!") > ./Group/Executioner.py
 cls
 call :GroupList
 
@@ -81,10 +82,7 @@ if defined choice (
         call :GroupUpdating
     ) else if %choice%==4 (
         call :GroupDeletion
-    ) else if %choice%==5 (
-        echo Thank You for using this Terminal Application.
-        echo Have an amazing Day Forward!!!!
-        pause
+    ) else if %choice%==5(
         EXIT /B 0
     ) else ( goto :Main )
 ) else ( goto :Main )

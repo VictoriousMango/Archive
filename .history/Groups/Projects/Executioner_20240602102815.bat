@@ -8,6 +8,11 @@ dir *.csv
 ENDLOCAL
 EXIT /B 0
 
+:pythonReader
+python
+
+EXIT /B 0
+
 :GroupCreation
     set /p csvName=Enter the name of the Group:
     if defined csvName ( 
@@ -19,19 +24,7 @@ EXIT /B 0
 EXIT /B 0
 
 :GroupExecution
-    set /p csvName=Enter the name of the Group: 
-    cls
-        if defined csvName ( 
-            if exist ./Group/%csvName%.csv (
-                for /f "tokens=1-3" %%A in ( ./Group/%csvName%.csv ) do (
-                    echo %%A %%B
-                    start %%C
-                ) 
-            )
-        ) else ( 
-            echo Please enter the name
-            pause
-        )
+call :pythonReader
 EXIT /B 0
 
 :GroupUpdating
@@ -58,10 +51,12 @@ EXIT /B 0
     ENDLOCAL
 EXIT /B 0
 
+
 Rem Main Funtion which will run first and all the functions that is to be called, will be defined above.
 
 :Main
 if exist ./Group ( echo Contected to Group Folder.) else ( mkdir Group)
+if exist ./Group/Executioner.py ( echo Contected to Excutioner. ) else echo print("Hello World!!") > ./Group/Executioner.py
 cls
 call :GroupList
 
@@ -69,7 +64,6 @@ echo 1. Create new Group
 echo 2. Start Executing the Group
 echo 3. Update a Group
 echo 4. Delete a Group
-echo 5. Exit
 
 set /p choice=Enter a Choice: 
 if defined choice (
@@ -81,11 +75,6 @@ if defined choice (
         call :GroupUpdating
     ) else if %choice%==4 (
         call :GroupDeletion
-    ) else if %choice%==5 (
-        echo Thank You for using this Terminal Application.
-        echo Have an amazing Day Forward!!!!
-        pause
-        EXIT /B 0
     ) else ( goto :Main )
 ) else ( goto :Main )
 
